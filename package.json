@@ -1,0 +1,39 @@
+{
+  "name": "sticky",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-routes": "cross-env NODE_ENV=test jest ./_test_/routes.test.js",
+    "test-db": "cross-env NODE_ENV=test jest ./_test_/db.test.js",
+    "start": "cross-env NODE_ENV=production node ./server",
+    "dev": "cross-env NODE_ENV=development nodemon ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CA-G12/sticky.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CA-G12/sticky/issues"
+  },
+  "homepage": "https://github.com/CA-G12/sticky#readme",
+  "dependencies": {
+    "@types/jest": "^28.1.7",
+    "compression": "^1.7.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.7",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
+  }
+}
