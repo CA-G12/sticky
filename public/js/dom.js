@@ -116,3 +116,16 @@ const handleTasksDom = (tasks) => {
 
   main.appendChild(container3);
 };
+
+
+// fetch
+const getAllTasks = () => {
+  fetch('/tasks')
+    .then((res)=> res.json())
+    .then((data) =>{
+      const sorted = data.data.sort((a, b) => new Date(b.task_date) - new Date(a.task_date));
+      handleTasksDom(sorted);
+    });
+};
+
+getAllTasks();
