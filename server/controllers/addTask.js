@@ -9,14 +9,15 @@ const {
 
 const addTask = (req, res) => {
   const { task, date } = req.body;
+  console.log(task, date);
   getDateQuery([date])
     .then((data) => {
       if (data.rows.length > 0) {
-        return data.rows[0];
+        return data;
       }
       return addDateQuery([date]);
     })
-    .then((dataDate) => dataDate)
+    .then((dataDate) => dataDate.rows[0])
     .then((dateId) => {
       const { id } = dateId;
       return addTaskQuery([task, id]);
