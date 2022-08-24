@@ -116,6 +116,7 @@ main {
   gap: 0.5rem;
   justify-content: flex-start;
   transition: all 0.2s ease-in-out;
+  flex-shrink: 0;
 }
 
 .card:hover {
