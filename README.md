@@ -27,7 +27,7 @@ No body likes sticky notes, and that's precisely why we made a web app that crea
   - Then `cd sticky`
   - run `npm i` in the terminal
   - run `npm run dev`
-  - in the browser run `http://localhost:4000/` url
+  - in the browser run `http://localhost:3000/` url
 
     </br>
 
