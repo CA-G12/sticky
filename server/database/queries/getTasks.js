@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
 
-const getTasksQuery = () => connection.query('SELECT id FROM dates WHERE (SELECT EXISTS(SELECT * FROM dates WHERE task_date = ($1))) AND task_date=($1);', ['01-12-2022']);
+const getTasksQuery = () => connection.query('SELECT tasks.id, tasks.task, tasks.state, dates.task_date FROM tasks JOIN dates ON dates.id = tasks.date_id;');
 
 module.exports = getTasksQuery;
