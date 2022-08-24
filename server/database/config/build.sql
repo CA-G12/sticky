@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS tasks, dates CASCADE;
 
 CREATE TABLE dates(
   id SERIAL PRIMARY KEY,
-  task_date DATE NOT NULL
+  task_date VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE tasks(
