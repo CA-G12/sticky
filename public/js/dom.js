@@ -77,59 +77,26 @@ const createCard = (tasks) => {
 };
 
 const handleTasksDom = (tasks) => {
-  console.log(tasks);
-  let date = tasks[0].task_date;
+  const obj = {};
 
-  const container = document.createElement('section');
-  const dateHead = document.createElement('h1');
-
-  container.classList = 'container';
-
-  dateHead.textContent = date;
-
-  container.appendChild(dateHead);
-  main.appendChild(container);
-
-  let noteTasks = [];
-  tasks.forEach((task, i) => {
-    if (task.task_date !== date) {
-      const container2 = document.createElement('section');
-      const dateHead2 = document.createElement('h1');
-      const note = createCard(noteTasks);
-
-      container2.classList = 'container';
-
-      container2.appendChild(dateHead2);
-      container2.appendChild(note);
-      main.appendChild(container2);
-
-      dateHead2.textContent = date;
-      date = task.task_date;
-
-      noteTasks = [];
-    }
-    noteTasks.push(task);
-    if (noteTasks.length === 4) {
-      const note = createCard(noteTasks);
-      container.appendChild(note);
-      noteTasks = [];
+  tasks.forEach((ele) => {
+    if (obj[ele.task_date]) {
+      obj[ele.task_date].push(ele);
+    } else {
+      obj[ele.task_date] = [ele];
     }
   });
-
-  const note = createCard(noteTasks);
-  const container3 = document.createElement('section');
-  const dateHead3 = document.createElement('h1');
-
-  container3.classList = 'container';
-
-  dateHead3.textContent = date;
-
-  container3.appendChild(dateHead3);
-  container3.appendChild(note);
-
-  main.appendChild(container3);
+  
+  for (let key in obj) {
+    const container = document.createElement('section');
+    const h1 = document.createElement('h1');
+    h1.textContent = key;
+    container.classList = `container`
+    container.appendChild(h1);
+    container.appendChild(createCard(obj[key]));
+    main.appendChild(container);
+  }
 };
-
 
 // fetch
 const getAllTasks = () => {
