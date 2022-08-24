@@ -51,9 +51,22 @@ const createCard = (tasks) => {
   card.appendChild(span);
   card.appendChild(list);
 
+  trash.addEventListener('click', (e) => {
+    const ts = e.target.parentElement.children[2].childNodes;
+
+    ts.forEach((el) => {
+      fetch(`/tasks/delete/${el.id}`)
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    });
+    e.target.parentElement.remove();
+  });
+
   tasks.forEach((e) => {
     const p = document.createElement('p');
     const li = document.createElement('li');
+
+    li.id = e.id;
     p.textContent = e.task;
 
     li.appendChild(p);
