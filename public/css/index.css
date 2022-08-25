@@ -236,3 +236,39 @@ main {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(85, 85, 85, 0);
 }
+
+/*  */
+.message {
+  position: fixed;
+  right: -100%;
+  padding: 0.8rem 3rem;
+  background-color: rgb(245, 197, 101);
+  box-shadow: 0 0 10px 0 #ccc;
+  z-index: 1000;
+  transition: all 0.2s ease-in-out;
+  width: 400px;
+  top: 1rem;
+}
+
+.message p{
+  color: #111;
+}
+
+.message span {
+  position: absolute;
+  bottom: 0;
+  left:0;
+  height: 5px;
+  background-color: #a3a3d3;
+  z-index: 1500;
+}
+
+.vanish {
+  animation: vanish 3s ease-in-out;
+  right: 1rem;
+  top: 1rem;
+}
+
+.vanishspan {
+  animation: complete 3s ease-in-out;
+}

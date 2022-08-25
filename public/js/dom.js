@@ -9,6 +9,13 @@ const addTaskBtn = document.querySelector('form button');
 const main = document.querySelector('main');
 const copyRight = document.querySelector('aside div');
 
+////
+
+let message = document.querySelector(`.message`);
+let msgp = document.querySelector('.message p');
+let messageSpan = document.querySelector(`.message span`);
+
+
 /// create one sticky note
 function createCard(tasks) {
   const card = document.createElement('div');
@@ -31,6 +38,13 @@ function createCard(tasks) {
       fetch(`/tasks/delete/${el.id}`)
         .then((res) => res.json())
         .then((data) => {
+          msgp.textContent = data.message;
+              messageSpan.classList.add(`vanishspan`);
+          message.classList.add(`vanish`);
+      setTimeout (() => {
+        message.classList.remove(`vanish`);
+        messageSpan.classList.remove(`vanishspan`);
+  }, 3000);
           getAllTasks();
         });
     });
@@ -142,8 +156,14 @@ addTaskBtn.addEventListener('click', (e) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert(data.message);
         getAllTasks();
+        msgp.textContent = data.message;
+        messageSpan.classList.add(`vanishspan`);
+          message.classList.add(`vanish`);
+      setTimeout (() => {
+        message.classList.remove(`vanish`);
+        messageSpan.classList.remove(`vanishspan`);
+  }, 3000);
       });
   } else {
     alert('please fill in all feilds');
