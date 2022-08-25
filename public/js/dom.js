@@ -38,14 +38,14 @@ function createCard(tasks) {
       fetch(`/tasks/delete/${el.id}`)
         .then((res) => res.json())
         .then((data) => {
-          msgp.textContent = data.message;
-              messageSpan.classList.add(`vanishspan`);
-          message.classList.add(`vanish`);
-      setTimeout (() => {
-        message.classList.remove(`vanish`);
-        messageSpan.classList.remove(`vanishspan`);
-  }, 3000);
           getAllTasks();
+          msgp.textContent = data.message;
+          messageSpan.classList.add(`vanishspan`);
+          message.classList.add(`vanish`);
+          setTimeout (() => {
+            message.classList.remove(`vanish`);
+            messageSpan.classList.remove(`vanishspan`);
+          }, 3000);
         });
     });
     e.target.parentElement.remove();
