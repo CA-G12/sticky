@@ -9,7 +9,6 @@ const {
 
 const addTask = (req, res) => {
   const { task, date } = req.body;
-  console.log(task, date);
   getDateQuery([date])
     .then((data) => {
       if (data.rows.length > 0) {

@@ -10,20 +10,20 @@ CREATE TABLE dates(
 CREATE TABLE tasks(
   id SERIAL PRIMARY KEY,
   task VARCHAR(200) NOT NULL,
-  state VARCHAR(100) NOT NULL DEFAULT('available'),
+  done BOOLEAN NOT NULL DEFAULT(FALSE),
   date_id INTEGER REFERENCES dates(id)
 );
 
 INSERT INTO dates(task_date) VALUES 
-('01-12-2022'),
-('04-10-2021'),
-('07-06-2022');
+('2022-12-01'),
+('2021-10-04'),
+('2022-06-07');
 
 INSERT INTO tasks(task, date_id) VALUES 
-('Lorem ipsum dolor sit', '1'),
-('Lorem ipsum', '2'),
-('Lorem ipsumd basil sara', '3'),
-('Lorem ipsumd basil sara shams mostafa', '1'),
-('Lorem ipsumd basil sara shams mostafa omar', '3');
+('take my clothes to dry clean', '1'),
+('buy caramella food', '2'),
+('kill Basil and steal all his money', '3'),
+('have a barbeque party on planet Mars', '1'),
+('You can consider this to be a task', '3');
 
 COMMIT;

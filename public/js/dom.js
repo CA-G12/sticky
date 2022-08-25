@@ -1,43 +1,16 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-unused-vars */
 const sideBar = document.querySelector('aside');
-const plusIcon = document.querySelector('.fa-square-plus');
+const plusIcon = document.querySelector('aside i');
 const form = document.querySelector('form');
 const textArea = document.querySelector('form textarea');
 const dateInput = document.querySelector('form input');
 const addTaskBtn = document.querySelector('form button');
-
-plusIcon.addEventListener('click', () => {
-  sideBar.style.width = '300px';
-  form.style.display = 'flex';
-});
-
-addTaskBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const task = textArea.value;
-  const date = dateInput.value.split('-').reverse().join('-');
-  if (task && date) {
-    form.style.display = 'none';
-    sideBar.style.width = 'auto';
-    fetch('/tasks/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ task, date }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.state === 'fail') alert(data.message);
-      });
-  } else {
-    alert('please fill in all feilds');
-  }
-});
-
-///
 const main = document.querySelector('main');
+const copyRight = document.querySelector('aside div');
 
-const createCard = (tasks) => {
+/// create one sticky note
+function createCard(tasks) {
   const card = document.createElement('div');
   const trash = document.createElement('i');
   const span = document.createElement('span');
@@ -57,7 +30,9 @@ const createCard = (tasks) => {
     ts.forEach((el) => {
       fetch(`/tasks/delete/${el.id}`)
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          getAllTasks();
+        });
     });
     e.target.parentElement.remove();
   });
@@ -66,17 +41,32 @@ const createCard = (tasks) => {
     const p = document.createElement('p');
     const li = document.createElement('li');
 
+    if (e.done) p.classList.add('done');
     li.id = e.id;
     p.textContent = e.task;
+
+    p.addEventListener('click', () => {
+      fetch(`/tasks/check/${e.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.state === 'fail') {
+            alert(data.message)
+          } else {
+            getAllTasks();
+          }
+        });
+    });
 
     li.appendChild(p);
     list.appendChild(li);
   });
 
   return card;
-};
+}
 
-const handleTasksDom = (tasks) => {
+/// handling the dom for all tasks
+function handleTasksDom(tasks) {
+  main.textContent = '';
   const obj = {};
 
   tasks.forEach((ele) => {
@@ -86,26 +76,83 @@ const handleTasksDom = (tasks) => {
       obj[ele.task_date] = [ele];
     }
   });
-  
-  for (let key in obj) {
-    const container = document.createElement('section');
-    const h1 = document.createElement('h1');
-    h1.textContent = key;
-    container.classList = `container`
-    container.appendChild(h1);
-    container.appendChild(createCard(obj[key]));
-    main.appendChild(container);
-  }
-};
 
-// fetch
-const getAllTasks = () => {
+  for (const key in obj) {
+    if (key) {
+      const container = document.createElement('section');
+      const h1 = document.createElement('h1');
+      h1.textContent = key.split('-').reverse().join('-');
+      container.classList = 'container';
+      container.appendChild(h1);
+
+      let noteTasks = [];
+
+      obj[key].forEach((el, i) => {
+        noteTasks.push(el);
+
+        if (noteTasks.length === 4 || (i + 1) === obj[key].length) {
+          const note = createCard(noteTasks);
+          container.appendChild(note);
+          noteTasks = [];
+        }
+      });
+
+      main.appendChild(container);
+    }
+  }
+}
+
+function getAllTasks() {
   fetch('/tasks')
-    .then((res)=> res.json())
-    .then((data) =>{
+    .then((res) => res.json())
+    .then((data) => {
       const sorted = data.data.sort((a, b) => new Date(b.task_date) - new Date(a.task_date));
       handleTasksDom(sorted);
     });
-};
+}
 
 getAllTasks();
+
+plusIcon.addEventListener('click', () => {
+  if (plusIcon.className === 'fa-solid fa-square-plus') {
+    sideBar.style.width = '300px';
+    form.style.display = 'flex';
+    plusIcon.classList = 'fa-solid fa-rectangle-xmark';
+    copyRight.style.display = 'block';
+  } else {
+    plusIcon.classList = 'fa-solid fa-square-plus';
+    sideBar.style.width = 'auto';
+    form.style.display = 'none';
+    copyRight.style.display = 'none';
+  }
+});
+
+/// adding new task
+addTaskBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const task = textArea.value;
+  const date = dateInput.value;
+  if (task && date) {
+    fetch('/tasks/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ task, date }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert(data.message);
+        getAllTasks();
+      });
+  } else {
+    alert('please fill in all feilds');
+  }
+});
+
+main.addEventListener('click', () => {
+  sideBar.style.width = 'auto';
+  form.style.display = 'none';
+  copyRight.style.display = 'none';
+  plusIcon.classList = 'fa-solid fa-square-plus';
+});

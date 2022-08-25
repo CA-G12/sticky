@@ -25,7 +25,7 @@ aside {
   padding: 2rem 1rem;
   background: linear-gradient(180deg,rgb(79, 150, 231), rgb(255, 139, 82));
   z-index: 10000;
-  box-shadow: 4px 0 10px 0 rgb(168, 168, 168);
+  box-shadow: 0 0 10px 0 rgb(46 46 46);
 }
 
 aside i {
@@ -70,6 +70,7 @@ aside form button {
   color: white;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgb(87, 87, 87);
 }
 
 aside form button:hover {
@@ -82,6 +83,25 @@ aside form >* {
   width: 100%;
   padding: 0.6rem 0.8rem;
   font-size: 1rem;
+}
+
+aside div {
+  position: absolute;
+  left: 0;
+  bottom: 2rem;
+  width: 100%;
+  z-index: 1000;
+  display: none;
+}
+
+aside div p {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(245, 197, 101);
+  text-shadow: 0 0 2px rgb(47, 47, 47);
 }
 
 main {
@@ -170,11 +190,19 @@ main {
 
 .card p {
   border-bottom: 1px solid #111;
-  padding: 0.4rem 0.5rem;
+  padding: 0rem 0.2rem 0.4rem;
   width: 100%;
   overflow: hidden;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  text-transform: capitalize;
   text-shadow:  0 0 0.5px #444;
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.card .done{
+  text-decoration: line-through;
 }
 
 .card i {
