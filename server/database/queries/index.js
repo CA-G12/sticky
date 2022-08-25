@@ -3,6 +3,7 @@ const getTasksQuery = require('./getTasks');
 const deleteTaskQuery = require('./deleteTask');
 const getDateQuery = require('./getDate');
 const addDateQuery = require('./addDate');
+const checkTaskQuery = require('./checkTask');
 
 module.exports = {
   addTaskQuery,
@@ -10,4 +11,5 @@ module.exports = {
   deleteTaskQuery,
   getDateQuery,
   addDateQuery,
+  checkTaskQuery,
 };

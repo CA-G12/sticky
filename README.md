@@ -1,6 +1,6 @@
 # sticky-notes-and-more
 
-# click [HERE](https://notes-sticky-sb.herokuapp.com/) bro!
+# click [HERE](https://notes-sticky-sb.herokuapp.com/) bro! We don't bite 😈
 
 ## Description:
 
@@ -13,6 +13,7 @@ No body likes sticky notes, and that's precisely why we made a web app that crea
 - The user can see their to-dos according to the date.
 - They can add new to do.
 - They can delete the whole sticky note.
+- They can cross off a task.
 
 ---
 
@@ -27,7 +28,6 @@ No body likes sticky notes, and that's precisely why we made a web app that crea
   - Then `cd sticky`
   - run `npm i` in the terminal
   - run `npm run dev`
-  - in the browser run `http://localhost:3000/` url
 
     </br>
 
@@ -35,16 +35,10 @@ No body likes sticky notes, and that's precisely why we made a web app that crea
 
   - Click on the 'Code' green button on the right.
   - Click on 'Download ZIP'.
-  - Extract the files.
-  - inside the project folder click `shit + right click`
-  - choose `open PowerShell window here`
-  - in command line run `npm i`
-  - run `npm run dev`
-  - in your browser run `http://localhost:3000/` url
 
     </br>
 
-`NOTE: Check out the example.env file, you need postgres links for connection 😎`
+`NOTE: Check out the example.env file, you need postgres links for the connection to work. so watch tutorials on how to make one 😎`
 
 `have fun 🥳`
 
@@ -62,6 +56,9 @@ No body likes sticky notes, and that's precisely why we made a web app that crea
 
 ---
 
+## [Tables Diagram](https://drawsql.app/teams/ninja-1/diagrams/sticky-note)
+
+---
 ## This app is presented to you by:
 
 - [Sara Dahman](https://github.com/SaraDahman)
